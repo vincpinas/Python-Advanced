@@ -21,7 +21,7 @@ BG_COLOUR = [0, 0, 0]
 IS_RUNNING = True
 
 
-playerSprite = pygame.image.load("../Art/spr_Player.png")
+playerSprite = pygame.image.load("./Art/spr_Player.png")
 playerRect = playerSprite.get_rect()
 playerSpeed = 5
 
