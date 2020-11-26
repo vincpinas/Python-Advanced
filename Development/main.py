@@ -1,6 +1,7 @@
 import sys
 import pygame
 from pygame.locals import *
+from Link import *
 
 # Necessary setup before you can start using pygame functionalities:
 pygame.init()
@@ -8,22 +9,24 @@ pygame.init()
 
 KEYS_DOWN = []
 
-SCREEN_WIDTH = 800
+SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 
 SCREEN_SIZE = [SCREEN_WIDTH, SCREEN_HEIGHT]
 SCREEN  = pygame.display.set_mode(SCREEN_SIZE)
 
 CLOCK   = pygame.time.Clock()
-FPS     = 30
+FPS     = 60
 
-BG_COLOUR = [0, 0, 0]
+BG = [0, 0, 0]
+
 IS_RUNNING = True
 
 
 playerSprite = pygame.image.load("./Art/spr_Player.png")
 playerRect = playerSprite.get_rect()
-playerSpeed = 5
+playerStats = Link(3, 20, 5, 3)
+
 
 
 while IS_RUNNING:
@@ -47,22 +50,37 @@ while IS_RUNNING:
     # UPDATE GAME LOGIC:
     # ------------------------------------------------
     if (KEYS_DOWN[K_UP]):
-        playerRect.y -= playerSpeed
+        playerRect.y -= playerStats.playerSpeed
     elif (KEYS_DOWN[K_DOWN]):
-        playerRect.y += playerSpeed
+        playerRect.y += playerStats.playerSpeed
 
     if (KEYS_DOWN[K_LEFT]):
-        playerRect.x -= playerSpeed
+        playerRect.x -= playerStats.playerSpeed
     elif (KEYS_DOWN[K_RIGHT]):
-        playerRect.x += playerSpeed
+        playerRect.x += playerStats.playerSpeed
+
+    if (KEYS_DOWN[K_9]):
+        BG = [255, 255, 255]
+    elif (KEYS_DOWN[K_8]):
+        BG = [34, 34, 34]
     
+    if playerRect.y > 590:
+        playerRect.y = 590
+    elif playerRect.y < -25:
+        playerRect.y = -25
+
+    if playerRect.x > 590:
+        playerRect.x = 590
+    elif playerRect.x < -25:
+        playerRect.x = -25
+
 
     # ------------------------------------------------
     # DRAWING INSTRUCTIONS
     # ------------------------------------------------
     # First clear the screen with a background color.
     # If you don't, you'll draw on top of what was previously drawn. See for yourself by removing/commenting this line... :)
-    SCREEN.fill(BG_COLOUR)
+    SCREEN.fill(BG)
 
     # Then draw sprites on the current location:
     SCREEN.blit(playerSprite, playerRect)
