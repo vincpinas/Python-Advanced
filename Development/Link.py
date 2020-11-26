@@ -9,3 +9,6 @@ class Link:
 
     def stats(self):
       return self.lives, self.points, self.strength, self.playerSpeed
+
+    def jump(self):
+        pass
