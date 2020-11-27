@@ -1,5 +1,4 @@
-import sys
-import pygame
+import sys, pygame, json
 from pygame.locals import *
 from Link import *
 from spritesheet import Spritesheet
@@ -47,8 +46,8 @@ playerSprite = my_spritesheet.getSprite(0,0,100,100)
 playerRect = playerSprite.get_rect()
 playerStats = Link(3, 20, 5, 2.5)
 
-vel_x = 10
-vel_y = 10
+vel_x = 12
+vel_y = 12
 jump = False
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -118,10 +117,10 @@ while IS_RUNNING:
 
     if jump is True:
         playerRect.y -= vel_y
-        vel_y -= 1
-        if vel_y < -10:
+        vel_y -= 0.75
+        if vel_y < -12:
             jump = False
-            vel_y = 10
+            vel_y = 12
 
     # ------------------------------------------------
     # DRAWING INSTRUCTIONS
@@ -132,11 +131,10 @@ while IS_RUNNING:
     # Background Image
     SCREEN.blit(BACKGROUND,(0,0))
     # Then draw sprites on the current location:
-    SCREEN.blit(playerSprite[index], playerRect)
+    SCREEN.blit(playerSprite, playerRect)
     
     # Finally refresh the entire screen of this application window:
     pygame.display.flip()
-
 
     # Prevent the game from running way too fast by restricting the amount of update cycles made per second.
     # The program basically waits a certain amount of time before it continues.
