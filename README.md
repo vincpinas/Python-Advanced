@@ -23,5 +23,6 @@
 * [Python Classes Indeling]
 
 
-[Class Variables vs. Instance Variables]: https://
-[Python Classes Indeling]: https://
+[Class Variables vs. Instance Variables]: https://github.com/vincpinas/Python-Advanced/tree/master/Notes%26Reference/classVariables
+
+[Python Classes Indeling]: https://github.com/vincpinas/Python-Advanced/tree/master/Notes%26Reference/Python%20Class
