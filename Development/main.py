@@ -1,10 +1,54 @@
 import sys, pygame, json
 from pygame.locals import *
-from Link import *
-from spritesheet import Spritesheet
 
 # Necessary setup before you can start using pygame functionalities:
 pygame.init()
+
+
+
+class Link:
+  # Standaard waarders
+    lives = 3
+    y = 0
+    x = 0
+    points = 20
+    strength = 5
+    playerSpeed = 2.5
+    playerSprite = None
+    rect = None
+
+
+  # In
+    def __init__(self):
+        self.playerSprite = pygame.image.load('./Art/spr_Player.png')
+        self.rect = self.playerSprite.get_rect()
+
+    def stats(self):
+      return self.points, self.strength, self.playerSpeed
+
+    def jump(self):
+        # Instructie om te springen
+        vel_x = 12
+        vel_y = 12
+        jump = False
+        pass
+
+    def Update(self):
+      if (KEYS_DOWN[K_UP]) or (KEYS_DOWN[K_w]):
+        self.rect.y -= self.playerSpeed
+      elif (KEYS_DOWN[K_DOWN]) or (KEYS_DOWN[K_s]):
+        self.rect.y += self.playerSpeed
+
+      if (KEYS_DOWN[K_LEFT]) or (KEYS_DOWN[K_a]):
+        self.rect.x -= self.playerSpeed
+      elif (KEYS_DOWN[K_RIGHT]) or (KEYS_DOWN[K_d]):
+        self.rect.x += self.playerSpeed
+
+
+
+    
+    def Draw(self, screenRef):
+      screenRef.blit(self.playerSprite, self.rect)
 
 
 KEYS_DOWN = []
@@ -41,32 +85,8 @@ BG = [0, 0, 0]
 
 IS_RUNNING = True
 
-my_spritesheet = Spritesheet('./Art/spritesheet.png')
-playerSprite = my_spritesheet.getSprite(0,0,100,100)
-playerRect = playerSprite.get_rect()
-playerStats = Link(3, 20, 5, 2.5)
 
-vel_x = 12
-vel_y = 12
-jump = False
-
-#----------------------------------------------------------------------------------------------------------------------------------------
-# Sprite Lists
-walkRight = [my_spritesheet.parseSprite('tile000.png'), my_spritesheet.parseSprite('tile001.png'), my_spritesheet.parseSprite('tile002.png'), my_spritesheet.parseSprite('tile003.png'), my_spritesheet.parseSprite('tile004.png'), 
-          my_spritesheet.parseSprite('tile005.png'), my_spritesheet.parseSprite('tile006.png'), my_spritesheet.parseSprite('tile007.png')]
-
-walkDown = [my_spritesheet.parseSprite('tile008.png'), my_spritesheet.parseSprite('tile009.png'), my_spritesheet.parseSprite('tile010.png'), my_spritesheet.parseSprite('tile011.png'), my_spritesheet.parseSprite('tile012.png'), 
-            my_spritesheet.parseSprite('tile013.png'), my_spritesheet.parseSprite('tile014.png'), my_spritesheet.parseSprite('tile015.png')]
-
-walkLeft = [my_spritesheet.parseSprite('tile016.png'), my_spritesheet.parseSprite('tile017.png'), my_spritesheet.parseSprite('tile018.png'), my_spritesheet.parseSprite('tile019.png'), my_spritesheet.parseSprite('tile020.png'), 
-            my_spritesheet.parseSprite('tile021.png'), my_spritesheet.parseSprite('tile022.png'), my_spritesheet.parseSprite('tile023.png')]
-
-walkUp = [my_spritesheet.parseSprite('tile024.png'), my_spritesheet.parseSprite('tile025.png'), my_spritesheet.parseSprite('tile026.png'), my_spritesheet.parseSprite('tile027.png'), my_spritesheet.parseSprite('tile028.png'), 
-          my_spritesheet.parseSprite('tile029.png'), my_spritesheet.parseSprite('tile030.png'), my_spritesheet.parseSprite('tile031.png')]
-
-index = 0
-
-#----------------------------------------------------------------------------------------------------------------------------------------
+player = Link()
 
 
 while IS_RUNNING:
@@ -87,40 +107,9 @@ while IS_RUNNING:
     # ------------------------------------------------
     # UPDATE GAME LOGIC:
     # ------------------------------------------------
-    if (KEYS_DOWN[K_UP]) or (KEYS_DOWN[K_w]):
-        playerRect.y -= playerStats.playerSpeed
-        index = (index + 1) % len(walkUp)
-    elif (KEYS_DOWN[K_DOWN]) or (KEYS_DOWN[K_s]):
-        playerRect.y += playerStats.playerSpeed
-        index = (index + 1) % len(walkDown)
 
-    if (KEYS_DOWN[K_LEFT]) or (KEYS_DOWN[K_a]):
-        playerRect.x -= playerStats.playerSpeed
-        index = (index + 1) % len(walkLeft)
-    elif (KEYS_DOWN[K_RIGHT]) or (KEYS_DOWN[K_d]):
-        playerRect.x += playerStats.playerSpeed
-        index = (index + 1) % len(walkRight)
+    player.Update()
 
-    
-    if playerRect.y > MaxY:
-        playerRect.y = MaxY
-    elif playerRect.y < MinY:
-        playerRect.y = MinY
-
-    if playerRect.x > MaxX:
-        playerRect.x = MaxX
-    elif playerRect.x < MinX:
-        playerRect.x = MinX
-
-    if jump is False and (KEYS_DOWN[K_SPACE]):
-        jump = True
-
-    if jump is True:
-        playerRect.y -= vel_y
-        vel_y -= 0.75
-        if vel_y < -12:
-            jump = False
-            vel_y = 12
 
     # ------------------------------------------------
     # DRAWING INSTRUCTIONS
@@ -130,8 +119,9 @@ while IS_RUNNING:
     SCREEN.fill(BG)
     # Background Image
     SCREEN.blit(BACKGROUND,(0,0))
-    # Then draw sprites on the current location:
-    SCREEN.blit(playerSprite, playerRect)
+
+
+    player.Draw(SCREEN)
     
     # Finally refresh the entire screen of this application window:
     pygame.display.flip()
