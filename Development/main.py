@@ -44,6 +44,17 @@ class Link:
       elif (KEYS_DOWN[K_RIGHT]) or (KEYS_DOWN[K_d]):
         self.rect.x += self.playerSpeed
 
+      if player.rect.y > MaxY:
+          player.rect.y = MaxY
+      elif player.rect.y < MinY:
+          player.rect.y = MinY
+
+      if player.rect.x > MaxX:
+          player.rect.x = MaxX
+      elif player.rect.x < MinX:
+          player.rect.x = MinX
+
+
 
 
     
@@ -109,7 +120,6 @@ while IS_RUNNING:
     # ------------------------------------------------
 
     player.Update()
-
 
     # ------------------------------------------------
     # DRAWING INSTRUCTIONS
