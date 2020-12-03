@@ -3,11 +3,12 @@ from pygame.locals import *
 
 # Necessary setup before you can start using pygame functionalities:
 pygame.init()
+pygame.mixer.init()
 
 
 
-class Link:
-  # Standaard waarders
+class Character:
+  # Standaard waardes
     lives = 3
     y = 0
     x = 0
@@ -16,7 +17,7 @@ class Link:
     playerSpeed = 2.5
     playerSprite = None
     rect = None
-
+    jumping = False
 
   # In
     def __init__(self):
@@ -26,12 +27,16 @@ class Link:
     def stats(self):
       return self.points, self.strength, self.playerSpeed
 
-    def jump(self):
+    def jump(self, jumping):
         # Instructie om te springen
-        vel_x = 12
-        vel_y = 12
-        jump = False
-        pass
+        vel_y = 10
+        self.jumping = jumping
+        if self.jumping is True:
+          self.rect.y -= vel_y
+          vel_y -= 1
+          if vel_y < -10:
+            self.jumping = False
+            vel_y = 10
 
     def Update(self):
       if (KEYS_DOWN[K_UP]) or (KEYS_DOWN[K_w]):
@@ -44,20 +49,19 @@ class Link:
       elif (KEYS_DOWN[K_RIGHT]) or (KEYS_DOWN[K_d]):
         self.rect.x += self.playerSpeed
 
-      if player.rect.y > MaxY:
-          player.rect.y = MaxY
-      elif player.rect.y < MinY:
-          player.rect.y = MinY
+      if self.rect.y > MaxY:
+          self.rect.y = MaxY
+      elif self.rect.y < MinY:
+          self.rect.y = MinY
 
-      if player.rect.x > MaxX:
-          player.rect.x = MaxX
-      elif player.rect.x < MinX:
-          player.rect.x = MinX
+      if self.rect.x > MaxX:
+          self.rect.x = MaxX
+      elif self.rect.x < MinX:
+          self.rect.x = MinX
 
+      if self.jumping is False and (KEYS_DOWN[K_SPACE]):
+        self.jump(True)
 
-
-
-    
     def Draw(self, screenRef):
       screenRef.blit(self.playerSprite, self.rect)
 
@@ -77,7 +81,6 @@ BACKGROUND = pygame.image.load('./Art/backgroundSpr.png')
 
 # Background Music
 MUSICPATH = "./Art/songs/ost3.mp3"
-pygame.mixer.init()
 pygame.mixer.music.set_volume(0.6)
 pygame.mixer.music.load(MUSICPATH)
 pygame.mixer.music.play()
@@ -97,7 +100,7 @@ BG = [0, 0, 0]
 IS_RUNNING = True
 
 
-player = Link()
+player = Character()
 
 
 while IS_RUNNING:
