@@ -23,8 +23,8 @@
 
 [Assignment 1 (Making Classes)]: https://github.com/vincpinas/Python-Advanced/tree/master/Assignments/classes.py
 [Assignment 2 (Class Inheritance)]: https://github.com/vincpinas/Python-Advanced/tree/master/Assignments/inheritance.py
----
 
+---
 ## ***Notes & References.***
 * [Class Variables vs. Instance Variables]
 * [Python Classes Indeling]
