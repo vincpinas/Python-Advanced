@@ -8,13 +8,13 @@
 
 |Emoji | Description |
 |------|-------------|
-|🔎 :mag_right:  |	Used when a new link is added
-|🔥  :fire:	      |   Used when removing chuncks of code or files
-|💙 :blue_heart: |	Used when adding new code
-|🐛 :bug:	     |  Used when fixing a bug
-|📦 :package:	 |  Used when installing dependencies or adding large files
-|📝 :memo:	     |  Used when writing documents or comments.
-|🎨 :art:	     |  Used when changing or adding a visual element
+|🔎 ```:mag_right:```  |	Used when a new link is added
+|🔥  ```:fire:```	      |   Used when removing chuncks of code or files
+|💙 ```:blue_heart:``` |	Used when adding new code
+|🐛 ```:bug:```	     |  Used when fixing a bug
+|📦 ```:package:```	 |  Used when installing dependencies or adding large files
+|📝 ```:memo:```	     |  Used when writing documents or comments.
+|🎨 ```:art:```	     |  Used when changing or adding a visual element
 
 ---
 ## **_Assignments_**
