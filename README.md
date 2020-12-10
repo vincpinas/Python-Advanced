@@ -20,6 +20,8 @@
 ## **_Assignments_**
 * [Assignment 1 (Making Classes)] 
 * [Assignment 2 (Class Inheritance)]
+* [Assignment 3 (Scope)]
 
 [Assignment 1 (Making Classes)]: https://github.com/vincpinas/Python-Advanced/tree/master/Assignments/classes.py
 [Assignment 2 (Class Inheritance)]: https://github.com/vincpinas/Python-Advanced/tree/master/Assignments/inheritance.py
+[Assignment 3 (Scope)]: https://github.com/vincpinas/Python-Advanced/tree/master/Assignments/scope.py
