@@ -5,27 +5,30 @@ from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
 
-
-
-class Character:
-  # Standaard waardes
-    lives = 3
-    y = 0
-    x = 0
+class BaseObject:
     points = 20
     strength = 5
     playerSpeed = 2.5
     playerSprite = None
     rect = None
-    jumping = False
-
-  # In
+    
     def __init__(self):
-        self.playerSprite = pygame.image.load('./Art/spr_Player.png')
-        self.rect = self.playerSprite.get_rect()
+      self.playerSprite = pygame.image.load('./Art/spr_Player.png')
+      self.rect = self.playerSprite.get_rect()
 
     def stats(self):
       return self.points, self.strength, self.playerSpeed
+
+    def Draw(self, screenRef):
+      screenRef.blit(self.playerSprite, self.rect)
+    
+
+class Character(BaseObject):
+  # Standaard waardes
+    lives = 3
+    y = 0
+    x = 0
+    jumping = False
 
     def jump(self, jumping):
         # Instructie om te springen
@@ -61,9 +64,6 @@ class Character:
 
       if self.jumping is False and (KEYS_DOWN[K_SPACE]):
         self.jump(True)
-
-    def Draw(self, screenRef):
-      screenRef.blit(self.playerSprite, self.rect)
 
 
 KEYS_DOWN = []
